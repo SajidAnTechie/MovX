@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import apikey from "../../api/apiKey";
 import Header from "../../utilis/Header";
-import ErrorPage from "../error";
+import ErrorPage from "../errorPages";
 import { Container } from "react-bootstrap";
 
 const Home = () => {
