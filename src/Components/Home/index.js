@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import apikey from "../../api/apiKey";
-import Header from "../../utilis/Header";
+import NowplayingMovie from "./nowplaying";
+import { HomeWrapper } from "./style";
 import ErrorPage from "../errorPages";
-import { Container } from "react-bootstrap";
 
 const Home = () => {
   const [NowPlaying, setNowPlaying] = useState([]);
@@ -18,31 +18,35 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      let nowPlayingData = await axios.get(
+      const nowPlayingData = await axios.get(
         `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=1`
       );
 
-      let upComingData = await axios.get(
+      const upComingData = await axios.get(
         `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=1`
       );
 
-      let topRatedData = await axios.get(
+      const topRatedData = await axios.get(
         `https://api.themoviedb.org/3/movie/top_rated?api_key=${apikey}&language=en-US&page=1`
       );
 
-      setNowPlaying(nowPlayingData);
-      setUpcoming(upComingData);
-      setTopRated(TopRated);
+      setNowPlaying(nowPlayingData.data.results.slice(0, 10));
+      setUpcoming(upComingData.data.results.slice(0, 10));
+      setTopRated(topRatedData.data.results.slice(0, 10));
     } catch (error) {
       setError(error);
     }
   };
 
   return (
-    <Container>
+    <HomeWrapper>
       {Error && <ErrorPage />}
-      {!Error && <Header>Now Playing</Header>}
-    </Container>
+      {!Error && (
+        <React.Fragment>
+          <NowplayingMovie movieData={NowPlaying} />
+        </React.Fragment>
+      )}
+    </HomeWrapper>
   );
 };
 export default Home;
