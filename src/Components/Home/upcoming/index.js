@@ -43,16 +43,18 @@ const UpcomingMovies = ({ movieData }) => {
         {movieData.map((movie, index) => {
           return (
             <Col key={index}>
-              <Card>
-                {/* <Card.Img
-                  variant="top"
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                /> */}
-                <Card.Body>
-                  <h4>{movie.title}</h4>
-                  <p>{movie.release_date}</p>
-                </Card.Body>
-              </Card>
+              <Link exact to={`/view/movie/${movie.id}`}>
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  />
+                  <Card.Body>
+                    <h4>{movie.title}</h4>
+                    <p>{movie.release_date}</p>
+                  </Card.Body>
+                </Card>
+              </Link>
             </Col>
           );
         })}

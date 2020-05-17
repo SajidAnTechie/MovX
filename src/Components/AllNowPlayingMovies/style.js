@@ -20,9 +20,14 @@ export const NowPlayingWrapper = styled.div`
   }
   .card {
     border-radius: 7px;
+    margin-top: 30px;
     img {
       border-top-left-radius: 7px;
       border-top-right-radius: 7px;
     }
+  }
+  a {
+    text-decoration: none;
+    color: black;
   }
 `;

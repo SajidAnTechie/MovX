@@ -4,15 +4,13 @@ import Header from "../../utilis/Header";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 
+const LoaderWrapper = styled.div`
+  .card {
+    border: 0px;
+  }
+`;
+
 const SkeletonLoader = () => {
-  const LoaderWrapper = styled.div`
-    .card {
-      border: 0px;
-    }
-    .card-footer {
-      border: 0px;
-    }
-  `;
   return (
     <LoaderWrapper>
       <Container>

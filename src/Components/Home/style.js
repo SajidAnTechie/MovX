@@ -42,6 +42,10 @@ export const HomeWrapper = styled.div`
       border-top-right-radius: 7px;
     }
   }
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 export const ButtonDiv = styled.div`
   width: 100%;
