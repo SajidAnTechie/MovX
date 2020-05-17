@@ -1,8 +1,8 @@
 import React from "react";
 import { ButtonWrapper } from "./style";
 
-const Button = (props) => {
+const GLobalButton = (props) => {
   return <ButtonWrapper type="button">{props.children}</ButtonWrapper>;
 };
 
-export default Button;
+export default GLobalButton;

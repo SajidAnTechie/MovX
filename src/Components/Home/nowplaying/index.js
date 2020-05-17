@@ -1,11 +1,10 @@
 import React from "react";
 import Header from "../../../utilis/Header";
-import Button from "../../../utilis/Button";
+import GLobalButton from "../../../utilis/Button";
 import { ButtonDiv } from "../style";
+import { Link } from "react-router-dom";
 import { Container, Col, Card } from "react-bootstrap";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 const NowPlaying = ({ movieData }) => {
   var settings = {
@@ -36,18 +35,19 @@ const NowPlaying = ({ movieData }) => {
       },
     ],
   };
+
   return (
     <Container>
-      <Header>Now Playing</Header>
+      <Header>Now Playing Movies</Header>
       <Slider {...settings}>
         {movieData.map((movie, index) => {
           return (
-            <Col>
+            <Col key={index}>
               <Card>
-                <Card.Img
+                {/* <Card.Img
                   variant="top"
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                />
+                /> */}
                 <Card.Body>
                   <h4>{movie.title}</h4>
                   <p>{movie.release_date}</p>
@@ -58,7 +58,9 @@ const NowPlaying = ({ movieData }) => {
         })}
       </Slider>
       <ButtonDiv>
-        <Button>View All NowPlaying Movies</Button>
+        <Link exact to="/NowPlaying_Movies">
+          <GLobalButton>View All NowPlaying Movies</GLobalButton>
+        </Link>
       </ButtonDiv>
     </Container>
   );
