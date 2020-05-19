@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const NavbarWrapper = styled.div`
   background-color: rgb(253, 183, 59);
+  width: 100%;
   img {
     width: 100px;
   }
@@ -9,6 +10,9 @@ export const NavbarWrapper = styled.div`
     color: rgb(23, 28, 32) !important;
     position: relative;
     margin-right: 26px;
+    :focus {
+      outline: none;
+    }
   }
   .active {
     font-weight: 700;

@@ -6,10 +6,9 @@ export const HeaderWrapper = styled.div`
   margin-bottom: 25px;
   h2 {
     font-weight: 600;
-    font-size: 1.25rem;
     text-transform: uppercase;
-    @media (max-width: 700px) {
-      font-size: 1rem;
+    @media (max-width: 1000px) {
+      font-size: 1.25rem;
     }
   }
 `;
@@ -27,9 +26,19 @@ export const ButtonWrapper = styled.button`
     background-color: rgb(232, 170, 60);
     outline: none;
   }
-  @media (max-width: 700px) {
+  @media (max-width: 1000px) {
     width: 177px;
     height: 45px;
     font-size: 11px;
+  }
+`;
+
+export const Pagination = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 55px;
+  button {
+    margin-left: 12px;
   }
 `;

@@ -1,10 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import Header from "../../utilis/Header";
 
 const Error = () => {
   return (
     <Container>
-      <h2>Opps Something went Wrong</h2>
+      <Header>Opps ! Something went Wrong</Header>
     </Container>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import apikey from "../../api/apiKey";
+import ErrorPage from "../errorPages";
 import NowplayingMovies from "./nowplaying";
 import UpcomingMovies from "./upcoming";
 import TopRatedMovies from "./topRated";
@@ -12,6 +13,7 @@ const Home = () => {
   const [Upcoming, setUpcoming] = useState([]);
   const [TopRated, setTopRated] = useState([]);
   const [Loading, setLoading] = useState(true);
+  const [Error, setError] = useState(null);
 
   useEffect(() => {
     let source = axios.CancelToken.source();
@@ -44,7 +46,7 @@ const Home = () => {
         setLoading(false);
       } catch (error) {
         if (!axios.isCancel(error)) {
-          console.log(error);
+          setError(error);
         }
       }
     };
@@ -58,6 +60,7 @@ const Home = () => {
 
   return (
     <HomeWrapper>
+      {Error && <ErrorPage />}
       {Loading && <Loader />}
       {!Loading && (
         <React.Fragment>

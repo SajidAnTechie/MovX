@@ -18,7 +18,7 @@ const SkeletonLoader = () => {
           <Skeleton height={30} width={"100%"} />
         </Header>
         <Row>
-          {Array(6)
+          {Array(8)
             .fill()
             .map((item, index) => {
               return (

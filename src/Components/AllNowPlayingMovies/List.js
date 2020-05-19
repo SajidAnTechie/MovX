@@ -3,11 +3,11 @@ import Header from "../../utilis/Header";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
-const List = ({ movieData }) => {
+const List = ({ movieData, totalResuls }) => {
   return (
     <Container>
       <Header>Now Playing Movies</Header>
-      <p>{movieData.length} Movies</p>
+      <p>{totalResuls} Movies</p>
       <Row>
         {movieData.map((movie, index) => {
           return (
