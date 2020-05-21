@@ -12,10 +12,11 @@ const Home = () => {
   const [NowPlaying, setNowPlaying] = useState([]);
   const [Upcoming, setUpcoming] = useState([]);
   const [TopRated, setTopRated] = useState([]);
-  const [Loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(false);
   const [Error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
     let source = axios.CancelToken.source();
     const fetchData = async () => {
       try {
@@ -59,17 +60,18 @@ const Home = () => {
   }, []);
 
   return (
-    <HomeWrapper>
+    <React.Fragment>
       {Error && <ErrorPage />}
       {Loading && <Loader />}
+
       {!Loading && (
-        <React.Fragment>
+        <HomeWrapper>
           <NowplayingMovies movieData={NowPlaying} />
           <UpcomingMovies movieData={Upcoming} />
           <TopRatedMovies movieData={TopRated} />
-        </React.Fragment>
+        </HomeWrapper>
       )}
-    </HomeWrapper>
+    </React.Fragment>
   );
 };
 export default Home;

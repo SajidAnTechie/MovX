@@ -10,7 +10,7 @@ import axios from "axios";
 
 const AllNowPLayingMovies = () => {
   const [NowPLaying, setNowPlayng] = useState([]);
-  const [Loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(false);
   const [Error, setError] = useState(null);
   const [active_page, setactive_page] = useState(1);
   const [total_page, settotal_page] = useState("");
@@ -22,7 +22,7 @@ const AllNowPLayingMovies = () => {
     const fetchNowplayingData = async () => {
       try {
         const nowPlayingData = await axios.get(
-          `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=1`,
+          `https://api.themoviedb.org/3/movie/now_playing?api_key=${apikey}&language=en-US&page=${active_page}`,
           {
             cancelToken: source.token,
           }
@@ -58,18 +58,22 @@ const AllNowPLayingMovies = () => {
   };
 
   return (
-    <NowPlayingWrapper>
+    <React.Fragment>
       {Error && <ErrorPage />}
       {Loading && <Loader />}
-      {!Loading && <List movieData={NowPLaying} totalResuls={total_results} />}
-      <Pagination>
-        <p>
-          Pages: {active_page} / {total_page}
-        </p>
-        <Button click={handlePrevios}>Previos</Button>
-        <Button click={handleNext}>Next</Button>
-      </Pagination>
-    </NowPlayingWrapper>
+      {!Loading && (
+        <NowPlayingWrapper>
+          <List movieData={NowPLaying} totalResults={total_results} />
+          <Pagination>
+            <p>
+              Pages: {active_page} / {total_page}
+            </p>
+            <Button click={handlePrevios}>Previous</Button>
+            <Button click={handleNext}>Next</Button>
+          </Pagination>
+        </NowPlayingWrapper>
+      )}
+    </React.Fragment>
   );
 };
 export default AllNowPLayingMovies;

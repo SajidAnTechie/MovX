@@ -9,6 +9,7 @@ const NowPlaying = lazy(() => import("./Components/AllNowPlayingMovies"));
 const TopRated = lazy(() => import("./Components/AlltopRatedMovies"));
 const Upcoming = lazy(() => import("./Components/AllUpcomingMovies"));
 const SinglePageMovie = lazy(() => import("./Components/singleMoviePage"));
+const SearchMovie = lazy(() => import("./Components/seacrhMovie"));
 
 function App() {
   return (
@@ -21,6 +22,11 @@ function App() {
           <Route exact path="/ToPRated_Movies" component={TopRated} />
           <Route exact path="/UpComing_Movies" component={Upcoming} />
           <Route exact path="/view/movie/:id" component={SinglePageMovie} />
+          <Route
+            exact
+            path="/search/movie/:movieName"
+            component={SearchMovie}
+          />
         </Switch>
       </Suspense>
     </BrowserRouter>

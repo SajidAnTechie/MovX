@@ -10,7 +10,7 @@ import axios from "axios";
 
 const AllTopRatedMovies = () => {
   const [TopRated, setTopRated] = useState([]);
-  const [Loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(false);
   const [Error, setError] = useState(null);
   const [active_page, setactive_page] = useState(1);
   const [total_page, settotal_page] = useState("");
@@ -58,18 +58,22 @@ const AllTopRatedMovies = () => {
   };
 
   return (
-    <TopRatedgWrapper>
+    <React.Fragment>
       {Error && <ErrorPage />}
       {Loading && <Loader />}
-      {!Loading && <List movieData={TopRated} totalResuls={total_results} />}
-      <Pagination>
-        <p>
-          Pages: {active_page} / {total_page}
-        </p>
-        <Button click={handlePrevios}>Previos</Button>
-        <Button click={handleNext}>Next</Button>
-      </Pagination>
-    </TopRatedgWrapper>
+      {!Loading && (
+        <TopRatedgWrapper>
+          <List movieData={TopRated} totalResults={total_results} />
+          <Pagination>
+            <p>
+              Pages: {active_page} / {total_page}
+            </p>
+            <Button click={handlePrevios}>Previous</Button>
+            <Button click={handleNext}>Next</Button>
+          </Pagination>
+        </TopRatedgWrapper>
+      )}
+    </React.Fragment>
   );
 };
 export default AllTopRatedMovies;

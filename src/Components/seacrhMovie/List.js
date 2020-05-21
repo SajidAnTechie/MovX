@@ -3,13 +3,13 @@ import Header from "../../utilis/Header";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
-const List = ({ movieData, totalResults }) => {
+const List = ({ MovieSearchData, totalResults, SearchMovieName }) => {
   return (
     <Container>
-      <Header>Upcoming Movies</Header>
+      <Header>Search Reasult for {SearchMovieName}</Header>
       <p>{totalResults} Movies</p>
       <Row>
-        {movieData.map((movie, index) => {
+        {MovieSearchData.map((movie, index) => {
           return (
             <Col key={index} md="3">
               <Link exact to={`/view/movie/${movie.id}`}>

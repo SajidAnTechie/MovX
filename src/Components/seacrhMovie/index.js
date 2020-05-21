@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import apikey from "../../api/apiKey";
 import List from "./List";
+import axios from "axios";
 import ErrorPage from "../errorPages";
 import Button from "../../utilis/Button";
-import { UpcominggWrapper } from "./style";
+import { SearchMovieWrapper } from "./style";
 import { Pagination } from "../../utilis/style";
 import Loader from "../loader/Loader";
-import axios from "axios";
+import apiKey from "../../api/apiKey";
 
-const AllUpcomingMovies = () => {
-  const [Upcoming, setUpcoming] = useState([]);
-  const [Loading, setLoading] = useState(false);
+const SearchMovie = (props) => {
+  const [MovieSearchData, setMovieSearchData] = useState([]);
   const [Error, setError] = useState(null);
+  const [Loading, setLoading] = useState(false);
   const [active_page, setactive_page] = useState(1);
   const [total_page, settotal_page] = useState("");
   const [total_results, settotal_results] = useState("");
@@ -19,21 +19,20 @@ const AllUpcomingMovies = () => {
   useEffect(() => {
     setLoading(true);
     let source = axios.CancelToken.source();
-    const fetchUpcomingData = async () => {
+    const fetchSearchData = async () => {
+      let movie_Name = props.match.params.movieName;
       try {
-        const upcomingData = await axios.get(
-          `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=${active_page}`,
+        let ViewData = await axios.get(
+          `https://api.themoviedb.org/3/search/movie/?api_key=${apiKey}&query=${movie_Name}&language=en-US&page=${active_page}&include_adult=false`,
           {
             cancelToken: source.token,
           }
         );
-
-        console.log(upcomingData);
-
-        setUpcoming(upcomingData.data.results);
-        settotal_page(upcomingData.data.total_pages);
-        settotal_results(upcomingData.data.total_results);
+        setMovieSearchData(ViewData.data.results);
+        settotal_page(ViewData.data.total_pages);
+        settotal_results(ViewData.data.total_results);
         setLoading(false);
+        console.log(ViewData);
       } catch (error) {
         if (!axios.isCancel(error)) {
           setError(error);
@@ -41,13 +40,13 @@ const AllUpcomingMovies = () => {
       }
     };
 
-    fetchUpcomingData();
+    fetchSearchData();
 
     return () => {
       console.log("Component Unmount");
       source.cancel();
     };
-  }, [active_page]);
+  }, [props.match.params.movieName, active_page]);
 
   const handleNext = () => {
     if (active_page < total_page) {
@@ -64,8 +63,12 @@ const AllUpcomingMovies = () => {
       {Error && <ErrorPage />}
       {Loading && <Loader />}
       {!Loading && (
-        <UpcominggWrapper>
-          <List movieData={Upcoming} totalResults={total_results} />
+        <SearchMovieWrapper>
+          <List
+            MovieSearchData={MovieSearchData}
+            totalResults={total_results}
+            SearchMovieName={props.match.params.movieName}
+          />
           <Pagination>
             <p>
               Pages: {active_page} / {total_page}
@@ -73,9 +76,10 @@ const AllUpcomingMovies = () => {
             <Button click={handlePrevios}>Previous</Button>
             <Button click={handleNext}>Next</Button>
           </Pagination>
-        </UpcominggWrapper>
+        </SearchMovieWrapper>
       )}
     </React.Fragment>
   );
 };
-export default AllUpcomingMovies;
+
+export default SearchMovie;

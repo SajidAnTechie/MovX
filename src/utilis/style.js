@@ -40,5 +40,7 @@ export const Pagination = styled.div`
   margin-top: 55px;
   button {
     margin-left: 12px;
+    width: 80px;
+    height: 31px;
   }
 `;
