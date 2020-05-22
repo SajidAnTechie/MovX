@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import Navbar from "./Components/Navbar";
+import Footer from "./Components/footer/footer";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -29,6 +30,7 @@ function App() {
           />
         </Switch>
       </Suspense>
+      <Footer />
     </BrowserRouter>
   );
 }
