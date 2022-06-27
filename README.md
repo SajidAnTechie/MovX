@@ -1,5 +1,6 @@
 ## OVERVIEW
 
+[API docs](https://developers.themoviedb.org/3)
 !["movie-app"](img/movie.PNG)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
