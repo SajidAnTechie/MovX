@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/footer/footer";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +14,7 @@ const SearchMovie = lazy(() => import("./Components/seacrhMovie"));
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
       <Suspense fallback={<p>Loading...</p>}>
         <Switch>
@@ -31,7 +31,7 @@ function App() {
         </Switch>
       </Suspense>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
